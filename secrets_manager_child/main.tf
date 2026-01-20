@@ -10,10 +10,10 @@ resource "aws_secretsmanager_secret" "this" {
   description = var.description
   tags        = var.tags
 
-lifecycle {
-  prevent_destroy = true
-  ignore_changes  = [tags, description]
-  }
+#lifecycle {
+#  prevent_destroy = true
+#  ignore_changes  = [tags, description]
+#  }
 }
 
 #############################
