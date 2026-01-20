@@ -10,9 +10,13 @@ variable "secret_name" {
 }
 
 variable "existing_secret_arn" {
-    description = "ARN of an existing secret (required when updating)"
-    type        = string
-    default     = null
+  type    = string
+  default = null
+
+  validation {
+    condition     = var.create_new_secret || var.existing_secret_arn != null
+    error_message = "existing_secret_arn must be provided when create_new_secret = false"
+  }
 }
 
 variable "secret_string" {
