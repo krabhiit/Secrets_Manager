@@ -8,4 +8,3 @@ module "secrets_manager" {
     description         = var.description
     tags                = var.tags
 }
-    
