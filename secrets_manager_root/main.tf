@@ -1,6 +1,7 @@
 module "secrets_manager" {
-    source = "./secrets_manager_child"
+    source = "../secrets_manager_child"
 
+    # pass required variables
     create_new_secret   = var.create_new_secret
     secret_name         = var.secret_name
     existing_secret_arn = var.existing_secret_arn
