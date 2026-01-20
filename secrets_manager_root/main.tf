@@ -1,32 +1,11 @@
-#########################
-#CREATE NEW SECRET
-#########################
+module "secrets_manager" {
+    source = "../secrets_manager_child"
 
-module "secrets_manager_create" {
-  source = "../secrets-manager-create"
-
-  secret_name   = "my-prod-secret"
-  description   = "Prod DB credentials"
-  secret_string = jsonencode({
-    username = "admin"
-    password = "SuperSecret123"
-  })
-
-  tags = {
-    Environment = "prod"
-    ManagedBy   = "terraform"
-  }
+    create_new_secret   = var.create_new_secret
+    secret_name         = var.secret_name
+    existing_secret_arn = var.existing_secret_arn
+    secret_string       = var.secret_string
+    description         = var.description
+    tags                = var.tags
 }
-
-#########################
-#UPDATE EXISTING SECRET
-#########################
-
-module "secrets_manager_existing" {
-  source = "../secrets-manager-existing"
-
-  existing_secret_arn = "arn:aws:secretsmanager:us-east-1:123456789012:secret:my-prod-secret"
-  secret_string = jsonencode({
-    password = "RotatedPassword123"
-  })
-}
+    

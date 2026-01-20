@@ -1,9 +1,3 @@
-variable "aws_region" {
-description = "AWS region where Secrets Manager resources will be created"
-type        = string
-default     = "us-east-1"
-}
-
 variable "create_new_secret" {
     description = "Set true to create a new secret, false to update an existing secret"
     type        = bool
