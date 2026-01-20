@@ -2,7 +2,7 @@
 #CREATE NEW SECRET
 #########################
 
-module "secrets_manager" {
+module "secrets_manager_create" {
   source = "../secrets-manager-create"
 
   secret_name   = "my-prod-secret"
@@ -22,7 +22,7 @@ module "secrets_manager" {
 #UPDATE EXISTING SECRET
 #########################
 
-module "secrets_manager" {
+module "secrets_manager_existing" {
   source = "../secrets-manager-existing"
 
   existing_secret_arn = "arn:aws:secretsmanager:us-east-1:123456789012:secret:my-prod-secret"
