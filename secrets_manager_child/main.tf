@@ -16,9 +16,9 @@ resource "aws_secretsmanager_secret" "this" {
   description = var.description
   tags        = var.tags
 
-  lifecycle {
-    prevent_destroy = true
-  }
+#  lifecycle {
+#    prevent_destroy = true
+#  }
 }
 
 #############################
