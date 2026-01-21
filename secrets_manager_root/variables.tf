@@ -1,34 +1,11 @@
-variable "create_new_secret" {
-    description = "Set true to create a new secret, false to update an existing secret"
-    type        = bool
-}
-
-variable "secret_name" {
-    description = "Secret name when creating a new secret"
-    type        = string
-    default     = null
-}
-
-variable "existing_secret_arn" {
-    description = "Existing secret ARN when updating"
-    type        = string
-    default     = null
-}
-
-variable "secret_string" {
-    description = "Secret value"
-    type        = string
-    sensitive   = true
-}
-
-variable "description" {
-    description = "Secret description"
-    type        = string
-    default     = "Managed by Terraform"
-}
-
-variable "tags" {
-    description = "Tags for the secret"
-    type        = map(string)
-    default     = {}
+variable "secrets" {
+  description = "Map of secrets to create or update"
+  type = map(object({
+    create_new_secret   = bool
+    secret_name         = optional(string, "")
+    existing_secret_arn = optional(string, "")
+    description         = optional(string)
+    secret_string       = optional(string, "")
+    tags                = optional(map(string), {})
+  }))
 }

@@ -1,9 +1,10 @@
-output "secret_arn" {
-    description = "ARN of the managed secret"
-    value       = module.secrets_manager.secret_arn
-}
-
-output "secret_name" {
-    description = "Name of the managed secret"
-    value       = module.secrets_manager.secret_name
+output "secrets" {
+  description = "Secrets managed by Terraform (name + arn only)"
+  value = {
+    for k, m in module.secrets_manager :
+    k => {
+      name = m.secret_name
+      arn  = m.secret_arn
+    }
+  }
 }
