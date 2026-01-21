@@ -7,7 +7,7 @@ variable "secret_name" {
   default = ""
 
   validation {
-    condition     = var.create_new_secret == false || length(trim(var.secret_name)) > 0
+    condition     = var.create_new_secret == false || length(trimspace(var.secret_name)) > 0
     error_message = "secret_name must be provided when create_new_secret = true."
   }
 }
@@ -17,7 +17,7 @@ variable "existing_secret_arn" {
   default = ""
 
   validation {
-    condition     = var.create_new_secret == true || length(trim(var.existing_secret_arn)) > 0
+    condition     = var.create_new_secret == true || length(trimspace(var.existing_secret_arn)) > 0
     error_message = "existing_secret_arn must be provided when create_new_secret = false."
   }
 }
