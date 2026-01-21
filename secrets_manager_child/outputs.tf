@@ -1,7 +1,16 @@
 output "secret_arn" {
-  value = var.create_new_secret? aws_secretsmanager_secret.this[0].arn: data.aws_secretsmanager_secret.existing[0].arn
+  description = "ARN of the created or updated secret"
+  value = try(
+    aws_secretsmanager_secret.this[0].arn,
+    var.existing_secret_arn,
+    null
+  )
 }
 
 output "secret_name" {
-  value = var.create_new_secret? aws_secretsmanager_secret.this[0].name: data.aws_secretsmanager_secret.existing[0].name
+  description = "Name of the created or updated secret"
+  value = try(
+    aws_secretsmanager_secret.this[0].name,
+    null
+  )
 }
