@@ -1,38 +1,35 @@
 variable "create_new_secret" {
-  type = bool
+  description = "Whether to create a new secret"
+  type        = bool
 }
 
 variable "secret_name" {
-  type    = string
-  default = ""
-
-  validation {
-    condition     = var.create_new_secret == false || length(trimspace(var.secret_name)) > 0
-    error_message = "secret_name must be provided when create_new_secret = true."
-  }
-}
-
-variable "existing_secret_arn" {
-  type    = string
-  default = ""
-
-  validation {
-    condition     = var.create_new_secret == true || length(trimspace(var.existing_secret_arn)) > 0
-    error_message = "existing_secret_arn must be provided when create_new_secret = false."
-  }
-}
-
-variable "secret_string" {
-  type    = string
-  default = ""
+  description = "Name of the secret (required if creating new)"
+  type        = string
+  default     = null
 }
 
 variable "description" {
-  type    = string
-  default = null
+  description = "Secret description"
+  type        = string
+  default     = null
+}
+
+variable "existing_secret_arn" {
+  description = "ARN of existing secret (required if updating)"
+  type        = string
+  default     = null
+}
+
+variable "secret_string" {
+  description = "Secret value (JSON or plain text). If null, default key/value will be used."
+  type        = string
+  default     = null
+  sensitive   = true
 }
 
 variable "tags" {
-  type    = map(string)
-  default = {}
+  description = "Tags for the secret"
+  type        = map(string)
+  default     = {}
 }
