@@ -1,7 +1,15 @@
-output "secret_arn" {
-  value = module.secrets_manager.secret_arn
+output "secret_arns" {
+  description = "ARNs of all secrets"
+  value = {
+    for k, m in module.secrets_manager :
+    k => m.secret_arn
+  }
 }
 
-output "secret_name" {
-  value = module.secrets_manager.secret_name
+output "secret_names" {
+  description = "Names of all secrets"
+  value = {
+    for k, m in module.secrets_manager :
+    k => m.secret_name
+  }
 }
