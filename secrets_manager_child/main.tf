@@ -15,7 +15,7 @@ resource "aws_secretsmanager_secret_version" "this" {
 
   secret_string = local.final_secret_string
 
-  lifecycle {
+  /*lifecycle {
     create_before_destroy = true
-  }
+  }*/
 }
