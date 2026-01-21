@@ -4,7 +4,7 @@
 
 #############################
 
-resource "aws_secretsmanager_secret" "this" {
+resource "aws_secretsmanager_secret" "new_secret" {
   count       = var.create_new_secret ? 1 : 0
   name        = var.secret_name
   description = var.description
@@ -22,7 +22,7 @@ resource "aws_secretsmanager_secret" "this" {
 
 #############################
 
-data "aws_secretsmanager_secret" "existing" {
+data "aws_secretsmanager_secret" "existing_secret" {
   count = var.create_new_secret ? 0 : 1
   arn   = var.existing_secret_arn
 }
@@ -33,10 +33,10 @@ data "aws_secretsmanager_secret" "existing" {
 
 #############################
 
-resource "aws_secretsmanager_secret_version" "this" {
-  secret_id = var.create_new_secret? aws_secretsmanager_secret.this[0].id: data.aws_secretsmanager_secret.existing[0].id
+resource "aws_secretsmanager_secret_key" "secret_value" {
+  secret_id = var.create_new_secret? aws_secretsmanager_secret.new_secret[0].id: data.aws_secretsmanager_secret.existing_secret[0].id
 
-  secret_string = var.secret_string
+  secret_key = var.secret_string
 
 lifecycle {
   create_before_destroy = true
