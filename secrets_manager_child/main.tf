@@ -5,10 +5,6 @@ locals {
   effective_secret_string = var.secret_string != null? var.secret_string: jsonencode({
         default = "default"
       })
-
-# lifecycle {
-#    prevent_destroy = true
-#  }
 }
 
 #############################
@@ -20,9 +16,9 @@ resource "aws_secretsmanager_secret" "this" {
   description = var.description
   tags        = var.tags
 
-#  lifecycle {
-#    prevent_destroy = true
-#  }
+  lifecycle {
+    prevent_destroy = var.prevent_destroy
+  }
 }
 
 #############################
@@ -33,7 +29,4 @@ resource "aws_secretsmanager_secret_version" "this" {
 
   secret_string = local.effective_secret_string
 
-# lifecycle {
-#    prevent_destroy = true
-#  }
-}
+} 
