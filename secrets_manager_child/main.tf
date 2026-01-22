@@ -5,6 +5,10 @@ locals {
   effective_secret_string = var.secret_string != null? var.secret_string: jsonencode({
         default = "default"
       })
+
+# lifecycle {
+#    prevent_destroy = true
+#  }
 }
 
 #############################
@@ -28,4 +32,8 @@ resource "aws_secretsmanager_secret_version" "this" {
   secret_id = var.create_new_secret? aws_secretsmanager_secret.this[0].id: var.existing_secret_arn
 
   secret_string = local.effective_secret_string
+
+# lifecycle {
+#    prevent_destroy = true
+#  }
 }
